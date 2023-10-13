@@ -1,4 +1,5 @@
-import useProductModal, { ProductModalContextProvider } from "../useProductModalContext";
+import useProductModal from "..";
+import { ProductModalContextProvider } from "../useProductModalContext";
 
 describe('ProductModalContext', () => {
     // TODO

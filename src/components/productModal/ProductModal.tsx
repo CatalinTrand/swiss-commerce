@@ -1,5 +1,5 @@
 import React from "react";
-import useProductModal from "../../contexts/productModalContext/useProductModalContext";
+import useProductModal from "../../contexts/productModalContext";
 import componentTestIds from "../../componentTestIds";
 
 const ProductModal = () => {

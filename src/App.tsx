@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
-import ProductList from "./pages/productList";
+import ProductListPage from "./pages/productListPage";
+import {ProductsContextProvider} from "./contexts/productsContext/useProductsContext";
 
 function App() {
   return (
     <div className="App">
-      <ProductList/>
+        <ProductsContextProvider>
+            <ProductListPage/>
+        </ProductsContextProvider>
     </div>
   );
 }

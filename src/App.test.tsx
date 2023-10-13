@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 const mockedProductListContent = 'some text';
-jest.mock('./pages/productList', () => () => <div>{mockedProductListContent}</div>);
+jest.mock('./pages/productListPage', () => () => <div>{mockedProductListContent}</div>);
 
 describe('App', () => {
   it('renders correctly', () => {

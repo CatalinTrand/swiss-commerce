@@ -1,6 +1,6 @@
 import React from "react";
 import {Product} from "../../common-types";
-import useProductModal from "../../contexts/productModalContext/useProductModalContext";
+import useProductModal from "../../contexts/productModalContext";
 import './style.scss';
 import testIds from "../../componentTestIds";
 
