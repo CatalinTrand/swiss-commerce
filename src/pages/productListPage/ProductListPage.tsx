@@ -16,14 +16,14 @@ const ProductListPage = () => {
 
     return (
         <ProductModalContextProvider>
-            <Container maxWidth='xs' data-testid={testIds.pages.productList.wrapper}>
+            <Container data-testid={testIds.pages.productList.wrapper}>
                 <ProductModal />
                 <Grid container spacing={3} margin={3}>
-                    <Grid container item spacing={2} data-testid={testIds.pages.productList.filterArea} justifyContent='center'>
-                        <Filters />
+                    <Grid item xs={12} md={6} container spacing={4} data-testid={testIds.pages.productList.filterArea} alignItems='center'>
                         <Sort />
+                        <Filters />
                     </Grid>
-                    <Grid container item spacing={2} data-testid={testIds.pages.productList.productGrid}>
+                    <Grid item xs={12} container spacing={3} data-testid={testIds.pages.productList.productGrid} justifyContent='space-between'>
                         {
                             productList.length
                                 ? productList.map((product) => <ProductCard {...product} key={product.productId}/>)

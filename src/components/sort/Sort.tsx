@@ -1,7 +1,7 @@
 import React from "react";
 import useProducts from "../../contexts/productsContext/useProductsContext";
 import testIds from "../../componentTestIds";
-import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Box, FormControl, Grid, InputLabel, MenuItem, Select} from "@mui/material";
 import {sortStates} from "../../constants";
 import {SortState} from "../../common-types";
 
@@ -9,7 +9,7 @@ const Sort = () => {
     const { sort, setSort } = useProducts();
 
     return (
-        <Box data-testid={testIds.components.sort.wrapper}>
+        <Grid item xs={5} data-testid={testIds.components.sort.wrapper}>
             <FormControl>
                 <InputLabel id={testIds.components.sort.selectLabel}>Sort by</InputLabel>
                 <Select
@@ -24,7 +24,7 @@ const Sort = () => {
                     }
                 </Select>
             </FormControl>
-        </Box>
+        </Grid>
     );
 }
 

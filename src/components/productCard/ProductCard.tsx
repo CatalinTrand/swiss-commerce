@@ -3,7 +3,7 @@ import {Product} from "../../common-types";
 import useProductModal from "../../contexts/productModalContext";
 import './style.scss';
 import testIds from "../../componentTestIds";
-import {Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography} from "@mui/material";
 
 interface Props extends Product{}
 
@@ -13,17 +13,46 @@ const ProductCard = (product: Props) => {
 
     return (
         <Grid item sm={12} md={6} lg={4} xl={3} data-testid={testIds.components.productCard.wrapper}>
-            <Card sx={{ width: 375 }}>
+            <Card elevation={2}>
                 <CardMedia
-                    sx={{ height: 140 }}
+                    sx={{ height: 140, margin: 1, backgroundSize: 'contain' }}
                     image={imageUrl}
                     title={name}
                 />
-                <CardContent>
-                    <Typography marginY={1} variant='h3' onClick={() => openProductModal(product)}>{name}</Typography>
-                    <Typography marginY={1} variant='h4'>{price}</Typography>
-                    <Typography marginY={2}>{rating} ({numberOfReviews})</Typography>
+                <CardContent sx={{ backgroundColor: 'lightgray'}}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} container spacing={1} flexDirection='row' alignItems='center'>
+                            <Grid item>
+                                <Typography
+                                    variant='subtitle1'
+                                    fontWeight='bold'
+                                    sx={{ cursor: 'pointer' }}
+                                    onClick={() => openProductModal(product)}
+                                >
+                                    {name}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant='h6'>
+                                    {price}€
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} container spacing={1} flexDirection='row' alignItems='center'>
+                            <Grid item>
+                                <Rating name="read-only" value={rating} readOnly />
+                            </Grid>
+                            <Grid item>
+                                <Typography>({numberOfReviews} reviews)</Typography>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </CardContent>
+                <CardActions sx={{ backgroundColor: 'lightgray'}}>
+                    <Button color='primary' variant='contained' fullWidth>
+                        Add to cart
+                    </Button>
+                </CardActions>
             </Card>
         </Grid>
     );
