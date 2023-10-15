@@ -5,9 +5,13 @@ import {defaultSortState} from "../../constants";
 import {applyFilters, applySort} from "../../components/helpers";
 
 export type ProductsContextType = {
+    possiblePrices: {
+        min: number,
+        max: number,
+    }
     productList?: Product[],
-    sort: SortState,
-    setSort: (sortState: SortState) => void,
+    sort: SortState['value'],
+    setSort: (sortStateValue: SortState['value']) => void,
     filters?: FilterState,
     setFilters: (filterState: FilterState) => void,
 }
@@ -16,7 +20,7 @@ const ProductsContext = React.createContext<ProductsContextType | undefined>(und
 
 export const ProductsContextProvider = ({children}: {children: React.ReactNode}) => {
     const [initialProductList, setInitialProductList] = React.useState<Product[]>();
-    const [sortState, setSortState] = React.useState<SortState>(defaultSortState);
+    const [sortState, setSortState] = React.useState<SortState['value']>(defaultSortState.value);
     const [fitlerState, setFilterState] = React.useState<FilterState>();
 
     const fetchProducts = React.useCallback(async () => {
@@ -33,17 +37,54 @@ export const ProductsContextProvider = ({children}: {children: React.ReactNode})
         fetchProducts();
     }, [fetchProducts]);
 
+    // compute the list of prices for all products as it will be needed for setting the min/max possible price
+    const priceList = React.useMemo(
+        () => initialProductList?.map(({ price }) => price),
+        [initialProductList]
+    );
+
+    const minPossiblePrice = React.useMemo(
+        () => priceList?.reduce((acc, curr) => Math.min(acc, curr)) ?? 0,
+        [priceList]
+    );
+
+    const maxPossiblePrice = React.useMemo(
+        () => priceList?.reduce((acc, curr) => Math.max(acc, curr)) ?? 0,
+        [priceList]
+    );
+
+    // initialise the filterState with the min/max price as default
+    React.useEffect(() => {
+      setFilterState({
+          minPrice: minPossiblePrice,
+          maxPrice: maxPossiblePrice
+      });
+    }, [setFilterState, minPossiblePrice, maxPossiblePrice]);
+
+    // compute currently rendered products, applying the filters and selected sorting order
     const renderedProductList = React.useMemo(
         () => initialProductList?.filter(applyFilters(fitlerState)).sort(applySort(sortState)),
         [initialProductList, fitlerState, sortState])
 
     const contextValue = React.useMemo(() => ({
+        possiblePrices: {
+            min: minPossiblePrice,
+            max: maxPossiblePrice,
+        },
         productList: renderedProductList,
         filters: fitlerState,
         setFilters: setFilterState,
         sort: sortState,
         setSort: setSortState,
-    }), [renderedProductList, fitlerState, setFilterState, sortState, setSortState]);
+    }), [
+        minPossiblePrice,
+        maxPossiblePrice,
+        renderedProductList,
+        fitlerState,
+        setFilterState,
+        sortState,
+        setSortState
+    ]);
 
     return (
         <ProductsContext.Provider value={contextValue}>

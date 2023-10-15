@@ -7,25 +7,27 @@ import ProductModal from "../../components/productModal";
 import Filters from "../../components/filters/Filters";
 import Sort from "../../components/sort/Sort";
 import useProducts from "../../contexts/productsContext/useProductsContext";
+import {Container, Grid } from "@mui/material";
 
 const ProductListPage = () => {
     const { productList } = useProducts();
 
     if(productList === undefined) return <LoadingSpinner />
 
-    // TODO - add classnames
     return (
         <ProductModalContextProvider>
-            <ProductModal />
-            <div>
-                <div>
-                    <Filters />
-                    <Sort />
-                </div>
-                <div data-testid={testIds.pages.productList.productGrid}>
-                    {productList.map((product) => <ProductCard {...product}/>)}
-                </div>
-            </div>
+            <Container data-testid={testIds.pages.productList.wrapper}>
+                <ProductModal />
+                <Grid container spacing={3}>
+                    <Grid container item spacing={2} data-testid={testIds.pages.productList.filterArea}>
+                        <Filters />
+                        <Sort />
+                    </Grid>
+                    <Grid container item spacing={2} data-testid={testIds.pages.productList.productGrid}>
+                        {productList.map((product) => <ProductCard {...product} key={product.productId}/>)}
+                    </Grid>
+                </Grid>
+            </Container>
         </ProductModalContextProvider>
     )
 }

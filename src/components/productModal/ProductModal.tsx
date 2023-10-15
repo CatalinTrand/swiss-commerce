@@ -1,19 +1,22 @@
 import React from "react";
+import {Box, Modal, Typography} from "@mui/material";
 import useProductModal from "../../contexts/productModalContext";
 import componentTestIds from "../../componentTestIds";
 
 const ProductModal = () => {
-    const { displayedProduct, closeProductModal } = useProductModal();
+    const { isProductModalOpen, displayedProduct, closeProductModal } = useProductModal();
 
-    if(!displayedProduct) return null;
-
-    // TODO - add classnames etc
     return (
-        <div data-testid={componentTestIds.components.productModal.wrapper}>
-            <div onClick={() => closeProductModal()}>X</div>
-            <span>{displayedProduct.name}</span>
-            <span>{displayedProduct.price}</span>
-        </div>
+        <Modal
+            open={isProductModalOpen}
+            onClose={closeProductModal}
+            data-testid={componentTestIds.components.productModal.wrapper}
+        >
+            <Box>
+                <Typography variant={'h3'}>{displayedProduct?.name}</Typography>
+                <Typography variant={'h4'}>{displayedProduct?.price}</Typography>
+            </Box>
+        </Modal>
     );
 }
 

@@ -6,8 +6,8 @@ export const applyFilters = (filter?: FilterState) => (product: Product) => {
     return product.price >= filter.minPrice && product.price <= filter.maxPrice;
 }
 
-export const applySort = (sort: SortState) => (p1: Product, p2: Product) => {
-    switch (sort.value) {
+export const applySort = (sortValue: SortState['value']) => (p1: Product, p2: Product) => {
+    switch (sortValue) {
         case 'PRICE_ASC':
             return p1.price - p2.price;
         case 'PRICE_DESC':
