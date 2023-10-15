@@ -19,11 +19,11 @@ const ProductListPage = () => {
             <Container data-testid={testIds.pages.productList.wrapper}>
                 <ProductModal />
                 <Grid container spacing={3} margin={3}>
-                    <Grid item xs={12} md={6} container spacing={4} data-testid={testIds.pages.productList.filterArea} alignItems='center'>
+                    <Grid item xs={10} md={6} container spacing={4} data-testid={testIds.pages.productList.filterArea} alignItems='center'>
                         <Sort />
                         <Filters />
                     </Grid>
-                    <Grid item xs={12} container spacing={3} data-testid={testIds.pages.productList.productGrid} justifyContent='space-between'>
+                    <Grid item xs={10} xl={12} container spacing={3} data-testid={testIds.pages.productList.productGrid}>
                         {
                             productList.length
                                 ? productList.map((product) => <ProductCard {...product} key={product.productId}/>)

@@ -9,7 +9,7 @@ const Sort = () => {
     const { sort, setSort } = useProducts();
 
     return (
-        <Grid item xs={5} data-testid={testIds.components.sort.wrapper}>
+        <Grid item xs={12} sm={5} data-testid={testIds.components.sort.wrapper}>
             <FormControl>
                 <InputLabel id={testIds.components.sort.selectLabel}>Sort by</InputLabel>
                 <Select

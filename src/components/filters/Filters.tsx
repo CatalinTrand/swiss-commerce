@@ -14,7 +14,7 @@ const Filters = () => {
     }, [setFilters])
 
     return (
-        <Grid item xs={7} container data-testid={testIds.components.filter.wrapper}>
+        <Grid item xs={12} sm={7} container data-testid={testIds.components.filter.wrapper}>
             <Grid item xs={12}>
                 <Typography fontSize={14} color='rgba(0,0,0,0.6)' >Filter by price</Typography>
             </Grid>

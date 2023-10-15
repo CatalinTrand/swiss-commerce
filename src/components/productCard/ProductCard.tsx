@@ -19,16 +19,11 @@ const ProductCard = (product: Props) => {
                     image={imageUrl}
                     title={name}
                 />
-                <CardContent sx={{ backgroundColor: 'lightgray'}}>
+                <CardContent className='product-card--card-content' onClick={() => openProductModal(product)}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} container spacing={1} flexDirection='row' alignItems='center'>
                             <Grid item>
-                                <Typography
-                                    variant='subtitle1'
-                                    fontWeight='bold'
-                                    sx={{ cursor: 'pointer' }}
-                                    onClick={() => openProductModal(product)}
-                                >
+                                <Typography variant='subtitle1' fontWeight='bold'>
                                     {name}
                                 </Typography>
                             </Grid>
