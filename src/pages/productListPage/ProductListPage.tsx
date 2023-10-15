@@ -7,7 +7,7 @@ import ProductModal from "../../components/productModal";
 import Filters from "../../components/filters/Filters";
 import Sort from "../../components/sort/Sort";
 import useProducts from "../../contexts/productsContext/useProductsContext";
-import {Container, Grid } from "@mui/material";
+import {Container, Grid, Typography} from "@mui/material";
 
 const ProductListPage = () => {
     const { productList } = useProducts();
@@ -24,7 +24,11 @@ const ProductListPage = () => {
                         <Sort />
                     </Grid>
                     <Grid container item spacing={2} data-testid={testIds.pages.productList.productGrid}>
-                        {productList.map((product) => <ProductCard {...product} key={product.productId}/>)}
+                        {
+                            productList.length
+                                ? productList.map((product) => <ProductCard {...product} key={product.productId}/>)
+                                : <Typography variant="subtitle1">No products found using the given filters!</Typography>
+                        }
                     </Grid>
                 </Grid>
             </Container>

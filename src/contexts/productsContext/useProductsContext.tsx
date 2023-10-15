@@ -23,6 +23,7 @@ export const ProductsContextProvider = ({children}: {children: React.ReactNode})
     const [sortState, setSortState] = React.useState<SortState['value']>(defaultSortState.value);
     const [fitlerState, setFilterState] = React.useState<FilterState>();
 
+    // simple handling of a product fetch
     const fetchProducts = React.useCallback(async () => {
         try {
             const products = await mockedFetchProducts();
@@ -33,11 +34,12 @@ export const ProductsContextProvider = ({children}: {children: React.ReactNode})
     }, [setInitialProductList]);
 
     React.useEffect(() => {
-        // mock implementation for a server call
+        // fetching the products once the component is mounted
         fetchProducts();
     }, [fetchProducts]);
 
     // compute the list of prices for all products as it will be needed for setting the min/max possible price
+    // saving as a separate variable to not compute it twice for each min/max
     const priceList = React.useMemo(
         () => initialProductList?.map(({ price }) => price),
         [initialProductList]
