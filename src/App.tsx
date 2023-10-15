@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import ProductListPage from "./pages/productListPage";
 import {ProductsContextProvider} from "./contexts/productsContext/useProductsContext";
 
