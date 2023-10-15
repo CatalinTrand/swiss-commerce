@@ -16,10 +16,10 @@ const ProductListPage = () => {
 
     return (
         <ProductModalContextProvider>
-            <Container data-testid={testIds.pages.productList.wrapper}>
+            <Container maxWidth='xs' data-testid={testIds.pages.productList.wrapper}>
                 <ProductModal />
-                <Grid container spacing={3}>
-                    <Grid container item spacing={2} data-testid={testIds.pages.productList.filterArea}>
+                <Grid container spacing={3} margin={3}>
+                    <Grid container item spacing={2} data-testid={testIds.pages.productList.filterArea} justifyContent='center'>
                         <Filters />
                         <Sort />
                     </Grid>

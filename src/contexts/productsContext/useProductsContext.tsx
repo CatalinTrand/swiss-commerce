@@ -46,12 +46,12 @@ export const ProductsContextProvider = ({children}: {children: React.ReactNode})
     );
 
     const minPossiblePrice = React.useMemo(
-        () => priceList?.reduce((acc, curr) => Math.min(acc, curr)) ?? 0,
+        () => priceList?.reduce((acc, curr) => Math.min(acc, curr), 10000) ?? 0,
         [priceList]
     );
 
     const maxPossiblePrice = React.useMemo(
-        () => priceList?.reduce((acc, curr) => Math.max(acc, curr)) ?? 0,
+        () => priceList?.reduce((acc, curr) => Math.max(acc, curr), 0) ?? 0,
         [priceList]
     );
 
