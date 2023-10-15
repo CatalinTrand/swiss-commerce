@@ -4,8 +4,8 @@ import ProductCard from "../../components/productCard/ProductCard";
 import testIds from "../../componentTestIds";
 import {ProductModalContextProvider} from "../../contexts/productModalContext/useProductModalContext";
 import ProductModal from "../../components/productModal";
-import Filters from "../../components/filters/Filters";
-import Sort from "../../components/sort/Sort";
+import Filters from "../../components/filters";
+import Sort from "../../components/sort";
 import useProducts from "../../contexts/productsContext/useProductsContext";
 import {Container, Grid, Typography} from "@mui/material";
 

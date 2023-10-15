@@ -1,7 +1,9 @@
 import React from "react";
-import {Box, Modal, Typography} from "@mui/material";
+import {Box, Button, Grid, Modal, Typography} from "@mui/material";
 import useProductModal from "../../contexts/productModalContext";
 import componentTestIds from "../../componentTestIds";
+import './style.scss';
+import {Close} from "@mui/icons-material";
 
 const ProductModal = () => {
     const { isProductModalOpen, displayedProduct, closeProductModal } = useProductModal();
@@ -12,10 +14,19 @@ const ProductModal = () => {
             onClose={closeProductModal}
             data-testid={componentTestIds.components.productModal.wrapper}
         >
-            <Box>
-                <Typography variant={'h3'}>{displayedProduct?.name}</Typography>
-                <Typography variant={'h4'}>{displayedProduct?.price}</Typography>
-            </Box>
+            <div className='modal-container'>
+                <div className='modal--body'>
+                    <div className='modal--body--top'>
+                        <Button onClick={() => closeProductModal()}>
+                            <Close/>
+                        </Button>
+                    </div>
+                    <div className='modal--body--content'>
+                        <h3>{displayedProduct?.name}</h3>
+                        <h4>{displayedProduct?.price}€</h4>
+                    </div>
+                </div>
+            </div>
         </Modal>
     );
 }
