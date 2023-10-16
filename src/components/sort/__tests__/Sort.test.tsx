@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Sort from '..';
 import { SortState } from '../../../common-types';
 import { mockedUseProductsReturnValue } from '../../../mocks/mockedTestData';
@@ -20,7 +20,17 @@ describe('Sort', () => {
     expect(screen.getByTestId(testIds.components.sort.wrapper)).toBeInTheDocument()
   })
 
-  it('select renders with correct test-id, label and options', () => {
+  it('select renders with correct test-id, label and options', async () => {
+    const defaultSortState: SortState = {
+      label: 'Price Ascending',
+      value: 'PRICE_ASC',
+    };
+
+    mockedUseProducts.mockReturnValueOnce({
+      ...mockedUseProductsReturnValue,
+      sort: defaultSortState.value,
+    })
+
     render(<Sort />);
 
     const select = screen.getByRole('combobox');
@@ -29,20 +39,20 @@ describe('Sort', () => {
 
     const selectLabel = screen.getByTestId(testIds.components.sort.selectLabel);
     expect(selectLabel).toBeInTheDocument();
-    expect(selectLabel).toContain('Sort by');
+    expect(selectLabel.textContent).toBe('Sort by');
 
     // open select
-    userEvent.click(selectLabel);
+    userEvent.click(select);
 
-    // all options from the constants file should be present
-    expect(screen.getAllByRole('option')).toHaveLength(sortStates.length);
+    expect(await screen.findAllByRole('option')).toHaveLength(sortStates.length);
 
     sortStates.forEach((sortState) => {
-      expect(screen.getByText(sortState.label)).toBeInTheDocument();
+      // all the select option labels appear once, except the currently selected value, which appears both as an option and as the select value
+      expect(screen.getAllByText(sortState.label)).toHaveLength(sortState.value === defaultSortState.value ? 2 : 1);
     })
   })
 
-  it('value and onChange work correctly', () => {
+  it('value and onChange work correctly', async () => {
     const sortState: SortState = {
       label: 'Price Ascending',
       value: 'PRICE_ASC',
@@ -62,17 +72,22 @@ describe('Sort', () => {
 
     const select = screen.getByRole('combobox');
 
-    expect(select).toHaveValue(sortState.value);
+    // while the select is not open, only the selected value is visible to the user, so we're checking if we're showing the correct visible value
+    expect(screen.getByText(sortState.label)).toBeInTheDocument();
+    expect(screen.queryByText(newSortState.label)).not.toBeInTheDocument();
 
     // open select
     userEvent.click(select);
 
+    // wait for select to open
+    expect(await screen.findAllByRole('option')).toHaveLength(sortStates.length);
+
     expect(setSort).not.toHaveBeenCalled();
 
-    // change value
-    userEvent.selectOptions(select, newSortState.value);
+    // change value (we're using findByText to wait for the options to render)
+    userEvent.click(await screen.findByText(newSortState.label));
 
-    expect(setSort).toBeCalledTimes(1);
-    expect(setSort).toHaveBeenCalledWith(newSortState);
+    await waitFor(() => expect(setSort).toBeCalledTimes(1));
+    expect(setSort).toHaveBeenCalledWith(newSortState.value);
   })
 });

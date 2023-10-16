@@ -11,7 +11,12 @@ const Sort = () => {
   return (
     <Grid item xs={12} sm={5} data-testid={testIds.components.sort.wrapper}>
       <FormControl>
-        <InputLabel id={testIds.components.sort.selectLabel}>Sort by</InputLabel>
+        <InputLabel
+          id={testIds.components.sort.selectLabel}
+          data-testid={testIds.components.sort.selectLabel}
+        >
+          Sort by
+        </InputLabel>
         <Select
           labelId={testIds.components.sort.selectLabel}
           id={testIds.components.sort.select}
@@ -20,7 +25,7 @@ const Sort = () => {
           onChange={(e) => setSort(e.target.value as SortState['value'])}
         >
           {
-            sortStates.map(({ value, label }) => <MenuItem value={value}>{label}</MenuItem>)
+            sortStates.map(({ value, label }) => <MenuItem value={value} key={value}>{label}</MenuItem>)
           }
         </Select>
       </FormControl>
