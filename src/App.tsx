@@ -1,13 +1,13 @@
+import ProductListPage from './pages/productListPage';
 import React from 'react';
-import ProductListPage from "./pages/productListPage";
-import {ProductsContextProvider} from "./contexts/productsContext/useProductsContext";
+import ShopLayout from './layouts/ShopLayout';
 
 function App() {
   return (
     <div className="App">
-        <ProductsContextProvider>
-            <ProductListPage/>
-        </ProductsContextProvider>
+      <ShopLayout>
+        <ProductListPage/>
+      </ShopLayout>
     </div>
   );
 }

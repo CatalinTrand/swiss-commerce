@@ -1,8 +1,8 @@
-import Sort from "..";
+import Sort from '..';
 
 describe('Sort', () => {
-   // TODO
-   it('renders successfully', () => {
+  // TODO
+  it('renders successfully', () => {
 
-   })
+  })
 });

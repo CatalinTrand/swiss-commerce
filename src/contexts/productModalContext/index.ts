@@ -1,1 +1,1 @@
-export {default} from './useProductModalContext';
+export { default } from './useProductModalContext';
