@@ -7,7 +7,7 @@ import { ProductModalContextProvider } from '../../contexts/productModalContext/
 import React from 'react';
 import Sort from '../../components/sort';
 import testIds from '../../componentTestIds';
-import useProducts from '../../contexts/productsContext/useProductsContext';
+import useProducts from '../../contexts/productsContext';
 
 const ProductListPage = () => {
   const { productList } = useProducts();

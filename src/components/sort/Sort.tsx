@@ -3,7 +3,7 @@ import React from 'react';
 import { SortState } from '../../common-types';
 import { sortStates } from '../../constants';
 import testIds from '../../componentTestIds';
-import useProducts from '../../contexts/productsContext/useProductsContext';
+import useProducts from '../../contexts/productsContext';
 
 const Sort = () => {
   const { sort, setSort } = useProducts();

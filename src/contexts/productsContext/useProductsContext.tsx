@@ -2,7 +2,7 @@ import { FilterState, Product, SortState } from '../../common-types';
 import { applyFilters, applySort } from '../../components/helpers';
 import React from 'react';
 import { defaultSortState } from '../../constants';
-import { mockedFetchProducts } from '../../mocks/mocks';
+import { mockedFetchProducts } from '../../mocks/mockedApi';
 
 export type ProductsContextType = {
   possiblePrices: {

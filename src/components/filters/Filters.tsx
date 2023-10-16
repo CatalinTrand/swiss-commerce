@@ -1,7 +1,7 @@
 import { Grid, Slider, Typography } from '@mui/material';
 import React from 'react';
 import testIds from '../../componentTestIds';
-import useProducts from '../../contexts/productsContext/useProductsContext';
+import useProducts from '../../contexts/productsContext';
 
 const Filters = () => {
   const { possiblePrices, filters, setFilters } = useProducts();
