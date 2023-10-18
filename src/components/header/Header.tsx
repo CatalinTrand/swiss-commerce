@@ -1,9 +1,9 @@
-import './style.scss'
 import React from 'react';
+import styles from './Header.module.scss';
 import testIds from '../../componentTestIds';
 
 const Header = () => (
-  <div className='header-wrapper' data-testid={testIds.components.header.wrapper}>
+  <div className={styles.headerWrapper} data-testid={testIds.components.header.wrapper}>
     <h2>Fischer-mann</h2>
   </div>
 );

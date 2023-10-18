@@ -1,8 +1,8 @@
-import './style.scss';
 import { Button, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import React from 'react';
 import componentTestIds from '../../componentTestIds';
+import styles from './ProductModal.module.scss';
 import useProductModal from '../../contexts/productModalContext';
 
 const ProductModal = () => {
@@ -14,14 +14,14 @@ const ProductModal = () => {
       onClose={closeProductModal}
       data-testid={componentTestIds.components.productModal.wrapper}
     >
-      <div className='modal-container'>
-        <div className='modal--body'>
-          <div className='modal--body--top'>
+      <div className={styles.modalContainer}>
+        <div className={styles.modalBody}>
+          <div className={styles.modalBodyTop}>
             <Button onClick={() => closeProductModal()}>
               <Close/>
             </Button>
           </div>
-          <div className='modal--body--content'>
+          <div className={styles.modalBodyContent}>
             <h3>{displayedProduct?.name}</h3>
             <h4>{displayedProduct?.price}€</h4>
           </div>

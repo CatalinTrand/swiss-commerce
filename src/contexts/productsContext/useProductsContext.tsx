@@ -2,7 +2,6 @@ import { FilterState, Product, SortState } from '../../common-types';
 import { applyFilters, applySort } from '../../components/helpers';
 import React from 'react';
 import { defaultSortState } from '../../constants';
-import { mockedFetchProducts } from '../../mocks/mockedApi';
 
 export type ProductsContextType = {
   possiblePrices: {
@@ -18,25 +17,12 @@ export type ProductsContextType = {
 
 const ProductsContext = React.createContext<ProductsContextType | undefined>(undefined);
 
-export const ProductsContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [initialProductList, setInitialProductList] = React.useState<Product[]>();
+export const ProductsContextProvider = ({ initialProductList, children }: {
+  initialProductList: Product[],
+  children: React.ReactNode,
+}) => {
   const [sortState, setSortState] = React.useState<SortState['value']>(defaultSortState.value);
   const [fitlerState, setFilterState] = React.useState<FilterState>();
-
-  // simple handling of a product fetch
-  const fetchProducts = React.useCallback(async () => {
-    try {
-      const products = await mockedFetchProducts();
-      setInitialProductList(products);
-    } catch (e) {
-      console.error('An error occured when fetching the products list', e)
-    }
-  }, [setInitialProductList]);
-
-  React.useEffect(() => {
-    // fetching the products once the component is mounted
-    fetchProducts();
-  }, [fetchProducts]);
 
   // compute the list of prices for all products as it will be needed for setting the min/max possible price
   // saving as a separate variable to not compute it twice for each min/max

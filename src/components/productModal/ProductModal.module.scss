@@ -1,9 +1,9 @@
-.modal-container {
+.modalContainer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   backdrop-filter: blur(3px);
 }
 
-.modal--body {
+.modalBody {
   pointer-events: auto;
   width: 90%;
   height: auto;
@@ -23,12 +23,13 @@
   -moz-box-shadow: 6px 6px 6px -4px rgba(0, 0, 0, 0.75);
   box-shadow: 6px 6px 6px -4px rgba(0, 0, 0, 0.75);
 
-  .modal--body--top {
+  .modalBodyTop {
     display: flex;
     justify-content: flex-end;
   }
 
-  .modal--body--content {
+  .modalBodyContent {
+    font-family: 'Roboto', sans-serif;
     padding: 0 30px;
 
     h3 {

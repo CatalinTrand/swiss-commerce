@@ -1,7 +1,7 @@
-import './style.scss';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
 import { Product } from '../../common-types';
 import React from 'react';
+import styles from './ProductCard.module.scss';
 import testIds from '../../componentTestIds';
 import useProductModal from '../../contexts/productModalContext';
 
@@ -20,7 +20,7 @@ const ProductCard = (product: Props) => {
           image={imageUrl}
           title={name}
         />
-        <CardContent className='product-card--card-content' onClick={() => openProductModal(product)}>
+        <CardContent className={styles.productCardCardContent} onClick={() => openProductModal(product)}>
           <Grid container spacing={2}>
             <Grid item xs={12} container spacing={1} flexDirection='row' alignItems='center'>
               <Grid item>
